@@ -8,7 +8,7 @@ const Categories = () => {
     {
       name: "Martial Arts",
       desc: "Build discipline, strength, and confidence through structured combat training programs.",
-      image: "/images/martial-arts.jpg",
+      image: "/images/karate.jpeg",
       route: "/services/martial-arts",
     },
     {
@@ -32,7 +32,7 @@ const Categories = () => {
     {
       name: "Target & Precision Sports",
       desc: "Master focus and accuracy with expert training in precision-based disciplines.",
-      image: "/images/target-precision-sports.jpg",
+      image: "/images/archery.jpeg",
       route: "/services/target-precision-sports",
     },
     {
@@ -44,7 +44,7 @@ const Categories = () => {
     {
       name: "Adventure & Outdoor Sports",
       desc: "Challenge yourself with thrilling outdoor activities designed for endurance and excitement.",
-      image: "/images/adventure-outdoor-sports.jpg",
+      image: "/images/bungee-jumping.jpeg",
       route: "/services/adventure-outdoor-sports",
     },
     {
@@ -56,13 +56,13 @@ const Categories = () => {
     {
   name: "Aquatic Sports",
   desc: "Develop strength, endurance, and technique through professional swimming and water-based sports training.",
-  image: "/images/aquatic-sports.jpg",
+  image: "/images/swimming.jpeg",
   route: "/services/aquatic",
 },
     {
       name: "Wellness",
       desc: "Focus on mental and physical well-being through guided wellness and recovery programs.",
-      image: "/images/wellness.jpg",
+      image: "/images/traditional-therapies.jpeg",
       route: "/services/wellness",
     },
     {

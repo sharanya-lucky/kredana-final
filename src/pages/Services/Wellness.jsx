@@ -25,7 +25,7 @@ const Wellness = () => {
     {
       name: "Fitness",
       desc: "Build strength, stamina, and overall physical health.",
-      image: "/images/fitness.jpeg",
+      image: "/images/fitness.jpg",
     },
     {
       name: "Nutrition",
