@@ -147,19 +147,21 @@ const Landing = () => {
       Grow & Succeed.
     </p>
 
-    <div className="mt-8 flex flex-wrap gap-4">
-      <button className="border border-orange-500 px-6 py-3 rounded-md text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300">
-        Manage & Engage Seamlessly
-      </button>
+<div className="mt-8 grid grid-cols-2 gap-6 max-w-2xl">
 
-      <button className="border border-orange-500 px-6 py-3 rounded-md text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300">
-        Grow & Scale Your Business
-      </button>
-    </div>
+  <button className="border border-orange-500 px-6 py-3 rounded-md text-orange-500">
+    Manage & Engage Seamlessly
+  </button>
 
-    <button className="mt-6 border border-orange-500 px-6 py-3 rounded-md text-orange-500 hover:bg-orange-500 hover:text-white transition duration-300">
-      Create & Showcase Your Profile
-    </button>
+  <button className="border border-orange-500 px-6 py-3 rounded-md text-orange-500">
+    Grow & Scale Your Business
+  </button>
+
+  <button className="col-span-2 justify-self-center border border-orange-500 px-6 py-3 rounded-md text-orange-500">
+    Create & Showcase Your Profile
+  </button>
+
+</div>
 
   </div>
 
