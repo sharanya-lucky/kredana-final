@@ -87,7 +87,7 @@ const StudentsTable = () => {
   return (
     <div className="overflow-x-auto bg-white rounded-lg shadow w-full">
       {/* HEADER */}
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 px-4 py-4 bg-[#1e293b] text-white font-bold text-lg text-center items-center">
+      <div className="grid grid-cols-4 px-6 py-4 bg-[#1e293b] text-white font-bold text-lg items-center">
 
         <div className="flex justify-center items-center gap-2">Students Name</div>
         <div className="flex justify-center items-center">Category</div>
@@ -109,10 +109,10 @@ const StudentsTable = () => {
             return (
               <div
                 key={row.id}
-                className="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 px-4 py-3 border-b border-gray-200 text-sm items-center hover:bg-gray-100 cursor-pointer"
+                className="grid grid-cols-4 px-6 py-4 border-b border-gray-200 text-sm items-center hover:bg-gray-100 cursor-pointer"
                 onClick={() => saveOrStartEdit(row)}
               >
-                <div className="flex justify-start items-center gap-2 text-left">
+                <div className="flex justify-center items-center text-center">
                   {isEditing ? (
                     <input
                       value={draft.name}
@@ -127,7 +127,7 @@ const StudentsTable = () => {
                   )}
                 </div>
 
-                <div>
+               <div className="text-center">
                   {isEditing ? (
                     <input
                       value={draft.category}
@@ -139,7 +139,7 @@ const StudentsTable = () => {
                   )}
                 </div>
 
-                <div>
+                <div className="text-center">
                   {isEditing ? (
                     <input
                       value={draft.sessions}
@@ -151,7 +151,7 @@ const StudentsTable = () => {
                   )}
                 </div>
 
-                <div>
+               <div className="text-center">
                   {isEditing ? (
                     <input
                       value={draft.phone}

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import TrainersTable from "./TrainersTable";
 import StudentsAttendancePage from "./StudentsAttendancePage";
 import FeesDetailsPage from "./FeesDetailsPage";
@@ -36,6 +36,7 @@ const TrainersDashboard = () => {
   const [trainers, setTrainers] = useState([]);
   const [trainerType, setTrainerType] = useState("Trainer"); // NEW
   const { institute } = useAuth();
+const [trainerData, setTrainerData] = useState(null);
 
   const studentLabel = trainerType === "Therapist" ? "Patients" : "Students";
   const trainerLabel = trainerType === "Therapist" ? "Therapist" : "Trainer";
@@ -119,6 +120,25 @@ const sidebarItems = [
 
     fetchStudents();
   }, []);
+  useEffect(() => {
+  const fetchTrainerData = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    try {
+      const docRef = doc(db, "trainers", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setTrainerData(docSnap.data());
+      }
+    } catch (err) {
+      console.error("Error fetching trainer data:", err);
+    }
+  };
+
+  fetchTrainerData();
+}, []);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -338,15 +358,25 @@ if (view === "PaymentsSubscriptionPage")
 
   {/* ===== INSTITUTE CARD ===== */}
   <div className="bg-black rounded-xl p-4 flex items-center gap-3 mb-3">
-    <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-orange-400">
+<div className="w-12 h-12 rounded-full overflow-hidden border-2 border-orange-400">
+  {trainerData?.profileImageUrl ? (
+    <img
+      src={trainerData.profileImageUrl}
+      alt="profile"
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full bg-gray-800 flex items-center justify-center">
       <span className="text-orange-400 font-bold">
-        {institute?.instituteName?.charAt(0) || "I"}
+        {trainerData?.instituteName?.charAt(0) || "I"}
       </span>
     </div>
+  )}
+</div>
 
-    <span className="text-orange-500 font-bold text-lg">
-      {institute?.instituteName || "Institute Name"}
-    </span>
+<span className="text-orange-500 font-bold text-lg">
+  {trainerData?.instituteName || "Institute Name"}
+</span>
   </div>
 
   {/* ===== MENU CARD ===== */}
