@@ -64,9 +64,9 @@ export default function RoleSelection() {
               {/* HEADER */}
               <div
                 onClick={() => toggleRole(role.id)}
-                className={`flex justify-between items-center px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5
+className={`flex justify-between items-center px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5
 border-2 border-orange-500 rounded-lg cursor-pointer
-bg-[#efefef] hover:bg-[#f7f7f7] transition-all duration-300`}
+bg-white hover:bg-orange-50 transition-all duration-300`}
               >
                 <span className="text-lg font-semibold text-black">
                   {role.title}
