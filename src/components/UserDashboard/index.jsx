@@ -19,8 +19,7 @@ import {
 // 
 import ChatBox from "./ChatBox";
 import Timetables from "./Timetables.jsx";
-
-import MyAccountLayout from "./MyAccount/MyAccountLayout";
+import MyAccount from "./MyAccount";
 import Dashboard from "./Dashboard";
 import FeesDetailsPage from "./FeesDetailsPage";
 /* =============================
@@ -187,25 +186,25 @@ const UserDashboard = () => {
   const renderMainContent = () => {
     switch (activeMenu) {
       case "Dashboard":
-  return <Dashboard />;
+        return <Dashboard />;
 
-    case "Time Table":
-  return <Timetables />;
+      case "Time Table":
+        return <Timetables />;
 
       case "Chat Box":
         return <ChatBox />;
 
       case "My Account":
-        return <MyAccountLayout />;
+        return <MyAccount />;
 
       case "Fees Details":
         return <FeesDetailsPage />;
 
-case "Customer Policy":
-  return <CustomerCentricPolicies />;
+      case "Customer Policy":
+        return <CustomerCentricPolicies />;
 
-case "Privacy Policy":
-  return <PrivacyPolicy />;
+      case "Privacy Policy":
+        return <PrivacyPolicy />;
 
       default:
         return null;
@@ -233,7 +232,7 @@ case "Privacy Policy":
   }
 
   return (
-  <div className="h-screen flex bg-gray-700 overflow-hidden">
+    <div className="h-screen flex bg-gray-700 overflow-hidden">
       {/* Sidebar */}
       {/* ===== SIDEBAR ===== */}
       <aside className="w-72 bg-gray-700 p-3 overflow-y-auto">
@@ -286,22 +285,21 @@ case "Privacy Policy":
             Settings
           </h3>
 
-{SettingsItems.map((item) => (
-  <button
-    key={item}
-    onClick={() => {
-      if (item === "Logout") return handleLogout();
-      setActiveMenu(item);
-    }}
-    className={`block w-full text-left py-2 ${
-      activeMenu === item
-        ? "text-orange-500 font-semibold"
-        : "text-white hover:text-orange-400"
-    }`}
-  >
-    {item}
-  </button>
-))}
+          {SettingsItems.map((item) => (
+            <button
+              key={item}
+              onClick={() => {
+                if (item === "Logout") return handleLogout();
+                setActiveMenu(item);
+              }}
+              className={`block w-full text-left py-2 ${activeMenu === item
+                  ? "text-orange-500 font-semibold"
+                  : "text-white hover:text-orange-400"
+                }`}
+            >
+              {item}
+            </button>
+          ))}
 
         </div>
 
