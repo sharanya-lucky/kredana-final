@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Search } from "lucide-react";
 
 const AquaticSports = () => {
   const navigate = useNavigate();
   const [selectedSubCategory, setSelectedSubCategory] = React.useState(null);
   const [showChoice, setShowChoice] = React.useState(false);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const categories = [
     { name: "Swimming", desc: "Competitive and fitness swimming techniques.", image: "/images/swimming.jpeg" },
@@ -28,6 +30,9 @@ const AquaticSports = () => {
     { name: "Artistic Swimming", desc: "Choreographed swimming combining dance and gymnastics.", image: "/images/artistic-swimming.jpeg" },
     { name: "Open Water Swimming", desc: "Long-distance swimming in open water bodies.", image: "/images/open-water-swimming.jpeg" },
   ];
+  const filteredCategories = categories.filter((item) =>
+  item.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
   return (
     <div className="font-sans bg-gray-50 text-gray-800 min-h-screen">
@@ -40,14 +45,42 @@ const AquaticSports = () => {
           ← Back to categories
         </button>
 
-        <h1 className="text-4xl font-extrabold mb-2">Aquatic Sports</h1>
-        <p className="text-gray-600 mb-8">
-          Explore water-based sports from competitive swimming to adventure activities
-        </p>
+        {/* TITLE + SEARCH ROW */}
+<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+  <div>
+    <h1 className="text-4xl font-extrabold">Aquatic Sports</h1>
+    <p className="text-gray-600 mt-2">
+      Explore water-based sports from competitive swimming to adventure activities
+    </p>
+  </div>
 
+  {/* SEARCH INPUT */}
+  <div className="relative mt-4 md:mt-0 w-64">
+    <Search
+      size={18}
+      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+    />
+
+    <input
+      type="text"
+      placeholder="Search disciplines..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg 
+                 focus:outline-none focus:border-orange-500 
+                 transition-all duration-200"
+    />
+  </div>
+</div>
+
+{/* DISCIPLINE COUNT */}
+<p className="text-sm text-gray-600 mb-8">
+  <span className="text-purple-600 text-lg">•</span>{" "}
+  {filteredCategories.length} Disciplines Available
+</p>
         {/* RESPONSIVE GRID - 4 PER ROW */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {categories.map((item) => (
+          {filteredCategories.map((item) => (
             <div
               key={item.name}
               onClick={() => {
