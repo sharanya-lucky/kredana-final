@@ -22,10 +22,10 @@ const Donut = ({ data }) => {
 
 const Dashboard = () => {
   return (
-    <div className="bg-white min-h-screen p-8">
+    <div className="bg-white min-h-screen p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto">
 
       {/* Top Cards */}
-      <div className="grid grid-cols-3 gap-8 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         <div className="bg-white border border-orange-400 rounded-lg p-5 flex items-center gap-4">
           <div className="bg-orange-100 p-3 rounded-md">
             <CalendarDays className="text-orange-500" />
@@ -58,10 +58,10 @@ const Dashboard = () => {
       </div>
 
       {/* Middle Section */}
-      <div className="grid grid-cols-3 gap-8 mb-16">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8 max-w-6xl mx-auto items-stretch">
 
         {/* Upcoming Events */}
-        <div className="col-span-1">
+        <div className="lg:col-span-1">
           <h2 className="text-lg font-semibold mb-4">Upcoming Events</h2>
 
           <div className="bg-white border border-orange-400 rounded-lg p-5 h-full">
@@ -90,12 +90,12 @@ const Dashboard = () => {
         </div>
 
         {/* Training Progress */}
-        <div className="col-span-2">
+        <div className="lg:col-span-3">
           <h2 className="text-lg font-semibold mb-6">Training Progress</h2>
 
-         <div className="bg-white border border-orange-400 rounded-lg p-5 h-full">
+         <div className="bg-white border border-orange-400 rounded-lg p-3 h-full flex flex-col">
 
-            <div className="flex justify-around items-center">
+            <div className="flex flex-col lg:flex-row justify-around items-center gap-8">
 
               {/* Left Donut */}
               <div className="flex flex-col items-center">
@@ -140,7 +140,7 @@ const Dashboard = () => {
 
             </div>
 
-            <p className="text-sm text-gray-600 mt-6">
+            <p className="text-sm text-gray-600 mt-3 mb-2">
               <strong>Trainer Observation :</strong> Demonstrates consistent dedication,
               strong discipline, and steady improvement across all training sessions.
             </p>
@@ -152,10 +152,10 @@ const Dashboard = () => {
 
 
      {/* Attendance Summary */}
-<div className="mt-10">
+<div className="mt-16">
         <h2 className="text-lg font-semibold mb-6">Attendance Summary</h2>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
           {[
             { title: "Karate Sessions", total: 12, present: 10, absent: 2 },

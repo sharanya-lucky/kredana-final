@@ -1,113 +1,122 @@
 // src/pages/RoleSelection.js
-import RoleCard from "../components/RoleCard";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ChevronRight, ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function RoleSelection() {
   const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState(null); // Stores clicked role
+  const [activeRole, setActiveRole] = useState(null);
 
-  const handleRoleClick = (role) => {
-    setSelectedRole(role); // Show modal with this role
+  const toggleRole = (role) => {
+    setActiveRole(activeRole === role ? null : role);
   };
 
-  const handleCloseModal = () => {
-    setSelectedRole(null);
-  };
-
-  const getSignupPath = (role) => {
-    switch (role) {
-      case "user":
-        return "/signup";
-      case "trainer":
-        return "/trainer-signup";
-      case "institute":
-        return "/institute-signup";
-      default:
-        return "/signup";
-    }
-  };
+  const roles = [
+    {
+      id: "user",
+      title: "Create a Customer Account",
+      points: [
+        "View available training sessions, book slots, and track schedule updates.",
+        "Purchase gym merchandise, supplements, and training equipment conveniently.",
+        "Access instructional and workout videos for guided training anytime.",
+        "Connect with trainers for personalized guidance, feedback, and improvement tips.",
+      ],
+    },
+    {
+      id: "trainer",
+      title: "Create a Trainer Profile",
+      points: [
+        "Manage member details, progress, and communication.",
+        "Update and maintain trainer profiles with achievements and specialties.",
+        "Track member attendance and manage payment records effortlessly.",
+        "Promote services, merchandise, and partner offers within the app.",
+      ],
+    },
+    {
+      id: "institute",
+      title: "Onboard Your Institute",
+      points: [
+        "Manage member details, progress, and communication.",
+        "Update and maintain trainer profiles with achievements and specialties.",
+        "Track member attendance and manage payment records effortlessly.",
+        "Promote services, merchandise, and partner offers within the app.",
+      ],
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
-      <h1 className="text-4xl font-bold mb-2 text-center">
-        Welcome To <span className="text-orange-500">Kridana</span>
-      </h1>
+    <div className="min-h-screen flex items-center justify-center bg-white px-3 sm:px-6 md:px-10 lg:px-16">
+      <div className="bg-white w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl rounded-lg p-4 sm:p-6 md:p-8 lg:p-10 text-center">
 
-      <p className="text-gray-300 mb-10 text-xl text-center">
-        Your Profile. Your Experience.
-      </p>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-500 mb-2 sm:mb-3">
+          Create Your Account
+        </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl">
-        <RoleCard
-          title="User"
-          points={[
-            "View available training sessions, book slots, and track schedule updates.",
-            "Purchase gym merchandise, supplements, and training equipment conveniently.",
-            "Access instructional and workout videos for guided training anytime.",
-            "Connect with trainers for personalized guidance, feedback, and improvement tips.",
-          ]}
-          onClick={() => handleRoleClick("user")}
-        />
+        <p className="text-gray-700 mb-8">
+          Get access to opportunities, institutes, and certified trainers in one location.
+        </p>
 
-        <RoleCard
-          title="Trainer / Therapist"
-          points={[
-            "Manage member details, progress, and communication.",
-            "Update and maintain trainer profiles with achievements and specialties.",
-            "Track member attendance and manage payment records effortlessly.",
-            "Promote services, merchandise, and partner offers within the app.",
-          ]}
-          onClick={() => handleRoleClick("trainer")}
-        />
+        <div className="bg-[#E7B89E] p-6 rounded-lg space-y-5">
 
-        <RoleCard 
-          title="Institute / Clinic / Sports Center / Play School"
-          points={[
-            "Manage member details, progress, and communication.",
-            "Update and maintain trainer profiles with achievements and specialties.",
-            "Track member attendance and manage payment records effortlessly.",
-            "Promote services, merchandise, and partner offers within the app.",
-          ]}
-          onClick={() => handleRoleClick("institute")}
-        />
-      </div>
+          {roles.map((role) => (
+            <div key={role.id}>
 
-      {/* Role Choice Modal */}
-      {selectedRole && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-xl max-w-sm w-full text-center text-black">
-            <h2 className="text-2xl font-bold mb-6">{selectedRole}</h2>
-            <p className="mb-6">Do you want to Sign Up or Sign In?</p>
-            <div className="flex justify-around">
-              <button
-                onClick={() => {
-                  navigate(getSignupPath(selectedRole));
-                  handleCloseModal();
-                }}
-                className="bg-orange-500 px-6 py-2 rounded-md text-white font-semibold hover:bg-orange-600 transition"
+              {/* HEADER */}
+              <div
+                onClick={() => toggleRole(role.id)}
+                className={`flex justify-between items-center px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5
+border-2 border-orange-500 rounded-lg cursor-pointer
+bg-[#efefef] hover:bg-[#f7f7f7] transition-all duration-300`}
               >
-                Sign Up
-              </button>
-              <button
-                onClick={() => {
-                  navigate(`/login?role=${selectedRole}`);
-                  handleCloseModal();
-                }}
-                className="bg-gray-700 px-6 py-2 rounded-md text-white font-semibold hover:bg-gray-800 transition"
+                <span className="text-lg font-semibold text-black">
+                  {role.title}
+                </span>
+
+                {activeRole === role.id ? (
+                  <ChevronDown className="text-orange-500" size={26} />
+                ) : (
+                  <ChevronRight className="text-orange-500" size={26} />
+                )}
+              </div>
+
+              {/* BODY */}
+              <div
+                className={`overflow-hidden transition-all duration-500 
+                ${activeRole === role.id ? "max-h-[1000px] mt-3" : "max-h-0"}`}
               >
-                Sign In
-              </button>
+                <div className="border-2 border-orange-500 rounded-lg bg-white text-left px-6 py-5">
+                  <ul className="list-disc pl-5 space-y-2 text-black">
+                    {role.points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+
+                  {/* BUTTONS */}
+                  <div className="flex flex-col sm:flex-row justify-end gap-3 mt-5">
+                    <button
+                      onClick={() => navigate(`/signup?role=${role.id}`)}
+                      className="bg-orange-500 px-5 py-2 rounded-md text-white font-semibold hover:bg-orange-600"
+                    >
+                      Sign Up
+                    </button>
+
+                    <button
+                      onClick={() => navigate(`/login?role=${role.id}`)}
+                      className="bg-gray-700 px-5 py-2 rounded-md text-white font-semibold hover:bg-gray-800"
+                    >
+                      Sign In
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
-            <button
-              onClick={handleCloseModal}
-              className="mt-4 text-sm text-red-500 hover:underline"
-            >
-              Cancel
-            </button>
-          </div>
+          ))}
+
         </div>
-      )}
+
+      </div>
     </div>
   );
 }
